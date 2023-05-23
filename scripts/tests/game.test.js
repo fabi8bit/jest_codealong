@@ -2,14 +2,9 @@
  * @jest-environment jsdom
  */
 
-// const { test } = require("node:test");
-// const { describe } = require("yargs");
 
-// const { beforeAll } = require("jest-circus");
-// const { test } = require("picomatch");
-// const { default: expect } = require("expect");
 
-const { game, newGame } = require("../game");
+const { game, newGame, showScore } = require("../game");
 
 beforeAll(() => {
     let fs = require("fs");
@@ -42,6 +37,7 @@ describe("newGame works correctly", () => {
         game.score = 42;
         game.playerMoves = ["button1", "button2"];
         game.currentGame = ["button3"];
+        document.getElementById("score").innerText = "42";
         newGame();
     });
     test("should set game score to zero", () => {
@@ -53,4 +49,7 @@ describe("newGame works correctly", () => {
     test("should clear currentGame", () => {
         expect(game.currentGame.length).toBe(0);
     });
+    test("should display 0 for the element with id of score", () => {
+        expect(document.getElementById("score").innerText).toEqual(0);
+    })
 });
